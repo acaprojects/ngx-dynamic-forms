@@ -89,6 +89,9 @@ export class ADynamicFormField<T = any> {
     private action: (value: T) => Promise<T>;
 
     constructor(options: IFormFieldOptions<T>) {
+        if (!options || !options.key || !options.type) {
+            throw new Error('ADynamicFormField needs a key and type to be set');
+        }
         let validators = [];
         if (options.required) {
             validators.push(Validators.required);
@@ -152,6 +155,7 @@ export class ADynamicFormField<T = any> {
      * Get the current value of the form field
      */
     public setValue(value: T): void {
+        console.log('Set value:', value, this.control);
         if (this.control instanceof FormControl) {
             this.control.setValue(value);
         }
