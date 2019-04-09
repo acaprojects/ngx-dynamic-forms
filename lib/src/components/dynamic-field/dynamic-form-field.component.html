@@ -1,7 +1,15 @@
-<div [class]="'dynamic-field' + (klass ? ' ' + klass : '') + (' ' + field?.type)" widget [style.display]="field.hide ? 'none' : ''">
+<div
+    *ngIf="group"
+    [class]="'dynamic-field' + (klass ? ' ' + klass : '') + (' ' + field?.type)"
+    widget
+    [style.display]="field.hide ? 'none' : ''"
+    [formGroup]="group"
+>
     <div class="details">
         <div class="icon" *ngIf="field.icon">
-            <i *ngIf="!field.icon.type || field.icon.type === 'icon'" [class]="field.icon.class">{{ field.icon.value }}</i>
+            <i *ngIf="!field.icon.type || field.icon.type === 'icon'" [class]="field.icon.class">{{
+                field.icon.value
+            }}</i>
             <img *ngIf="field.icon.type === 'image' || field.icon.type === 'img'" [src]="field.icon.src" />
         </div>
         <label *ngIf="field.label" [for]="field.key">{{ field.label }}</label>
@@ -21,12 +29,8 @@
                     [placeholder]="field.attributes?.placeholder || field.attributes?.label || field.label"
                 ></textarea>
                 <!-- SELECT/ACTION FORM FIELD -->
-                <div *ngSwitchCase="'action'" (tapped)="field.performAction()">
-                    <ul>
-                        {{
-                            field.formatted
-                        }}
-                    </ul>
+                <div *ngSwitchCase="'action'" class="underline" (tapped)="field.performAction()">
+                    {{ field.formatted }}
                 </div>
                 <!-- SELECT/ACTION FORM FIELD -->
                 <!-- <checkbox
@@ -39,7 +43,7 @@
                 </ng-container>
                 <!-- DEFAULT TO A TEXT INPUT FIELD -->
                 <input
-                    *ngSwitchCase="'text'"
+                    *ngSwitchCase="'input'"
                     [id]="field.key"
                     [formControlName]="field.key"
                     [type]="field.attributes?.type"

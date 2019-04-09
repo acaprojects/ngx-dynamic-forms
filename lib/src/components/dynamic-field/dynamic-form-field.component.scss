@@ -1,20 +1,47 @@
-
 .dynamic-field {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    margin: .25em 0;
 }
 
 .details {
-    min-width: 10em;
+    display: flex;
+    min-width: 8em;
 }
 
 label {
     font-size: .8em;
-    font-weight: 500;
+    font-weight: 600;
+    margin: .5em;
+    height: 1.4em;
 }
 
 .control {
+    display: flex;
+    align-items: center;
     flex: 1;
-    min-width: 20em;
+    min-width: 16em;
+    min-height: 2em;
+}
+
+input,
+textarea {
+    font-size: 1em;
+    padding: .5em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: none;
+        opacity: .54;
+    }
+}
+
+textarea {
+    resize: none;
 }

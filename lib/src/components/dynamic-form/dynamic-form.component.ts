@@ -22,6 +22,13 @@ export class DynamicFormComponent implements OnChanges {
     }
 
     private initForm() {
-        this.group = new FormGroup(this.fields.reduce((a, i) => a[i.key] = i.control, {}));
+        this.group = new FormGroup(
+            this.fields.reduce((a, i) => {
+                if (i.control) {
+                    a[i.key] = i.control;
+                }
+                return a;
+            }, {})
+        );
     }
 }

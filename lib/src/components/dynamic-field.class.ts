@@ -1,4 +1,3 @@
-
 import { TemplateRef, Type } from '@angular/core';
 import { FormControl, AbstractControl, Validators, FormGroup } from '@angular/forms';
 
@@ -63,6 +62,8 @@ export type FormFieldContent = TemplateRef<any> | Type<any> | string;
 export class ADynamicFormField<T = any> {
     /** Identifier of the form field */
     readonly key: string;
+    /** Type of input control the form field is */
+    readonly type: 'input' | 'textarea' | 'action' | 'checkbox' | 'dropdown' | 'group' | 'custom';
     /** Display name of the form field */
     readonly label: string;
     /** Display icon of the form field */
@@ -96,6 +97,7 @@ export class ADynamicFormField<T = any> {
             validators = validators.length > 0 ? [...validators, ...options.validators] : [...options.validators];
         }
         this.key = options.key;
+        this.type = options.type;
         this.label = options.label;
         this.content = options.content;
         this.metadata = options.metadata;
@@ -107,7 +109,7 @@ export class ADynamicFormField<T = any> {
             if (options.children && options.children.length > 0) {
                 options.children.forEach(i => this.children.push(new ADynamicFormField(i)));
             }
-            this.control = new FormGroup(this.children.reduce((a, i) => a[i.key] = i.control, {}));
+            this.control = new FormGroup(this.children.reduce((a, i) => (a[i.key] = i.control), {}));
         }
     }
 
@@ -127,7 +129,9 @@ export class ADynamicFormField<T = any> {
     }
 
     /** Whether this form control is displayed */
-    public get hide() { return this._hide; }
+    public get hide() {
+        return this._hide;
+    }
 
     /**
      * Set whether the form field is displayed on the DOM
@@ -142,6 +146,15 @@ export class ADynamicFormField<T = any> {
      */
     public getValue(): T {
         return this.control.value;
+    }
+
+    /**
+     * Get the current value of the form field
+     */
+    public setValue(value: T): void {
+        if (this.control instanceof FormControl) {
+            this.control.setValue(value);
+        }
     }
 
     /**
@@ -177,12 +190,12 @@ export class ADynamicFormField<T = any> {
      * Call the action function for the control
      */
     public performAction() {
-
         if (this.action && this.action instanceof Function) {
-            this.action(this.getValue()).then((v) => {
-                if (this.control instanceof FormControl) { this.control.setValue(v); }
+            this.action(this.getValue()).then(v => {
+                if (this.control instanceof FormControl) {
+                    this.setValue(v);
+                }
             });
         }
     }
-
 }

@@ -1,5 +1,7 @@
 <div [class]="'dynamic-form' + (klass ? ' ' + klass : '')" widget>
-    <ng-container *ngFor="let item of fields">
-        <a-dynamic-form-field [klass]="klass" [group]="group" [field]="item"></a-dynamic-form-field>
-    </ng-container>
+    <form *ngIf="group" [formGroup]="group">
+        <ng-container *ngFor="let item of fields">
+            <a-dynamic-form-field [klass]="klass" [group]="group" [field]="item"></a-dynamic-form-field>
+        </ng-container>
+    </form>
 </div>
