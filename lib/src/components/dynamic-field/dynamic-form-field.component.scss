@@ -1,0 +1,20 @@
+
+.dynamic-field {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.details {
+    min-width: 10em;
+}
+
+label {
+    font-size: .8em;
+    font-weight: 500;
+}
+
+.control {
+    flex: 1;
+    min-width: 20em;
+}
