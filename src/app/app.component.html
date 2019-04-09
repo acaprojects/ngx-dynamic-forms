@@ -1,7 +1,5 @@
 <div class="app">
     <div class="test">
-        <button feedback (tapped)="toggle()">Test {{ model.test }}</button>
-
-        <div class="square" style="overflow: visible" feedback [center]="true"></div>
+        <a-dynamic-form [fields]="model.fields"></a-dynamic-form>
     </div>
 </div>

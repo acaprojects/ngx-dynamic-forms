@@ -1,6 +1,7 @@
 import { Component, ViewContainerRef, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { AppService } from './services/app.service';
+import { ADynamicFormField } from '../../lib/src/public_api';
 
 import * as day_api from 'dayjs';
 const dayjs = day_api;
@@ -16,7 +17,14 @@ export class AppComponent implements OnInit {
 
     constructor(private view: ViewContainerRef, private service: AppService) {}
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.model.fields = [
+            new ADynamicFormField({ type: 'input', key: name, label: 'Your name', value: null }),
+            new ADynamicFormField({ type: 'action', key: name, label: 'Your host', value: null }),
+            new ADynamicFormField({ type: 'checkbox', key: name, attributes: { label: 'Attending' }, value: null }),
+            new ADynamicFormField({ type: 'textarea', key: name, label: 'Your name', value: null })
+        ];
+    }
 
     public toggle() {
         console.warn('Toggle');

@@ -5,14 +5,14 @@ import { FormControl, AbstractControl, Validators, FormGroup } from '@angular/fo
 export interface IFormFieldOptions<T = any> {
     /** Identier of the form field */
     key: string;
-    /** Display name of the form field */
-    name: string;
-    /** Displayed icon for the form field */
-    icon?: IFormFieldIcon;
     /** Type of input control the form field is */
-    control_type?: 'text' | 'multiline' | 'select' | 'checkbox' | 'dropdown' | 'group' | 'custom';
+    type: 'input' | 'textarea' | 'action' | 'checkbox' | 'dropdown' | 'group' | 'custom';
     /** Initial value of the form field */
     value: T;
+    /** Display name of the form field */
+    label?: string;
+    /** Displayed icon for the form field */
+    icon?: IFormFieldIcon;
     /** Whether form control disabled */
     disabled?: boolean;
     /** Whether the form field is required */
@@ -27,9 +27,11 @@ export interface IFormFieldOptions<T = any> {
     content?: FormFieldContent;
     /** Metadata passed into custom field contents */
     metadata?: { [name: string]: any };
+    /** Form Field element attributes */
+    attributes?: { [name: string]: string };
     /** Form Field settings */
     settings?: IFormFieldSettings;
-    /** Function for formatting the display value of th */
+    /** Function for formatting the display value of the form field */
     format?: (value: T) => string;
     /** Action callback for `select` control_type */
     action?: (value: T) => Promise<T>;
@@ -62,7 +64,7 @@ export class ADynamicFormField<T = any> {
     /** Identifier of the form field */
     readonly key: string;
     /** Display name of the form field */
-    readonly name: string;
+    readonly label: string;
     /** Display icon of the form field */
     readonly icon: IFormFieldIcon;
     /** Angular Form Control element*/
@@ -73,8 +75,17 @@ export class ADynamicFormField<T = any> {
     readonly content: FormFieldContent;
     /** Metadata passed into custom field contents */
     readonly metadata: { [name: string]: any };
+    /** Form field input control attriabutes */
+    readonly attributes: { [name: string]: string };
     /** Whether to force the display of errors */
     public show_errors: boolean;
+    /** Whether to display the form field */
+    private _hide: boolean;
+
+    /** Function for formatting the display value of the form field */
+    private format: (value: T) => string;
+    /** Action callback for `action` control_type */
+    private action: (value: T) => Promise<T>;
 
     constructor(options: IFormFieldOptions<T>) {
         let validators = [];
@@ -85,10 +96,12 @@ export class ADynamicFormField<T = any> {
             validators = validators.length > 0 ? [...validators, ...options.validators] : [...options.validators];
         }
         this.key = options.key;
-        this.name = options.name;
+        this.label = options.label;
         this.content = options.content;
         this.metadata = options.metadata;
-        if (!options.control_type || options.control_type !== 'group') {
+        this.attributes = options.attributes;
+        this._hide = options.hide;
+        if (!options.type || options.type !== 'group') {
             this.control = new FormControl({ value: options.value, disabled: options.disabled }, validators);
         } else {
             if (options.children && options.children.length > 0) {
@@ -102,8 +115,26 @@ export class ADynamicFormField<T = any> {
      * Sets the disabled state of the form field control
      * @param state Whether the field is disabled
      */
-    public disabled(state: boolean): void {
+    public setDisabled(state: boolean): void {
         state ? this.control.disable() : this.control.enable();
+    }
+
+    /**
+     * Whether the form control is disabled
+     */
+    public get disabled() {
+        return this.control.disabled;
+    }
+
+    /** Whether this form control is displayed */
+    public get hide() { return this._hide; }
+
+    /**
+     * Set whether the form field is displayed on the DOM
+     * @param state Whether the form field is displayed
+     */
+    public setHide(state: boolean) {
+        this._hide = state;
     }
 
     /**
@@ -134,4 +165,24 @@ export class ADynamicFormField<T = any> {
     public canDisplayErrors(): boolean {
         return this.control.dirty || this.show_errors;
     }
+
+    /**
+     * Get formatted form control value
+     */
+    public get formatted() {
+        return this.format ? this.format(this.getValue()) : this.getValue();
+    }
+
+    /**
+     * Call the action function for the control
+     */
+    public performAction() {
+
+        if (this.action && this.action instanceof Function) {
+            this.action(this.getValue()).then((v) => {
+                if (this.control instanceof FormControl) { this.control.setValue(v); }
+            });
+        }
+    }
+
 }

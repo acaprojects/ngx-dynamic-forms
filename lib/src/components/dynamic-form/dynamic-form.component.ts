@@ -11,7 +11,7 @@ export class DynamicFormComponent implements OnChanges {
     /** CSS class to add to the root element of the component */
     @Input() public klass = 'default';
     /** Form fields */
-    @Input() fields: ADynamicFormField[];
+    @Input() public fields: ADynamicFormField[];
 
     public group: FormGroup;
 

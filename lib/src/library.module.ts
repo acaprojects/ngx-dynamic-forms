@@ -5,32 +5,38 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextFieldModule } from '@angular/cdk/text-field';
+
+import { CheckboxModule } from '@acaprojects/ngx-checkbox';
+import { DropdownModule } from '@acaprojects/ngx-dropdown';
 
 import { LIBRARY_SETTINGS } from './settings';
+
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DynamicFormFieldComponent } from './components/dynamic-field/dynamic-form-field.component';
 
 import * as day_api from 'dayjs';
 const dayjs = day_api;
 
-const COMPONENTS: Type<any>[] = [];
+const COMPONENTS: Type<any>[] = [DynamicFormComponent, DynamicFormFieldComponent];
 const DIRECTIVES: Type<any>[] = [];
 
 @NgModule({
     declarations: [...COMPONENTS, ...DIRECTIVES],
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, TextFieldModule, CheckboxModule, DropdownModule],
     exports: [...COMPONENTS, ...DIRECTIVES]
 })
 class LibraryModule {
     public static version = '0.1.0';
     private static init = false;
-    private build = dayjs(1554789802000);
+    private build = dayjs(1554792225000);
 
     constructor() {
         if (!LibraryModule.init) {
             const now = dayjs();
             LibraryModule.init = true;
-            const build = now.isSame(this.build, 'd')
-                ? `Today at ${this.build.format('h:mmA')}`
-                : this.build.format('D MMM YYYY, h:mmA');
+            const build = now.isSame(this.build, 'd') ? `Today at ${this.build.format('h:mmA')}` : this.build.format('D MMM YYYY, h:mmA');
             LIBRARY_SETTINGS.version(LibraryModule.version, build);
         }
     }
