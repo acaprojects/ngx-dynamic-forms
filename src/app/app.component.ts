@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewContainerRef, ViewEncapsulation, OnInit, ViewChild, TemplateRef } from '@angular/core';
 
 import { AppService } from './services/app.service';
 import { ADynamicFormField } from '../../lib/src/public_api';
@@ -15,6 +15,8 @@ const dayjs = day_api;
 export class AppComponent implements OnInit {
     public model: { [name: string]: any } = {};
 
+    @ViewChild(TemplateRef) private dropdown: TemplateRef<any>;
+
     constructor(private view: ViewContainerRef, private service: AppService) {}
 
     public ngOnInit(): void {
@@ -22,7 +24,15 @@ export class AppComponent implements OnInit {
             new ADynamicFormField({ type: 'input', key: 'name', label: 'Your name', value: null }),
             new ADynamicFormField({ type: 'action', key: 'host', label: 'Your host', value: 'Check' }),
             new ADynamicFormField({ type: 'checkbox', key: 'attending', attributes: { label: 'Attending' }, value: null }),
-            new ADynamicFormField({ type: 'textarea', key: 'other_name', label: 'Your name', value: null })
+            new ADynamicFormField({ type: 'textarea', key: 'other_name', label: 'Your name', value: null }),
+            new ADynamicFormField({
+                type: 'custom',
+                key: 'other_name',
+                content: this.dropdown,
+                label: 'The dropdown',
+                value: 'Item 2',
+                metadata: { options: ['Item 1', 'Item 2', 'Item 3'] }
+            })
         ];
         setInterval(() => {
             const value = Math.floor(Math.random() * 99999);

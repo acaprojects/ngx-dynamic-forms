@@ -15,11 +15,12 @@ import { LIBRARY_SETTINGS } from './settings';
 
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { DynamicFormFieldComponent } from './components/dynamic-field/dynamic-form-field.component';
+import { CustomFormFieldComponent } from './components/custom-field/custom-form-field.component';
 
 import * as day_api from 'dayjs';
 const dayjs = day_api;
 
-const COMPONENTS: Type<any>[] = [DynamicFormComponent, DynamicFormFieldComponent];
+const COMPONENTS: Type<any>[] = [DynamicFormComponent, DynamicFormFieldComponent, CustomFormFieldComponent];
 const DIRECTIVES: Type<any>[] = [];
 
 @NgModule({

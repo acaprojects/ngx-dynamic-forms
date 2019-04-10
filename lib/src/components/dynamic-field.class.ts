@@ -78,6 +78,8 @@ export class ADynamicFormField<T = any> {
     readonly metadata: { [name: string]: any };
     /** Form field input control attriabutes */
     readonly attributes: { [name: string]: string };
+    /** Whether to field is required to have a value */
+    readonly required: boolean;
     /** Whether to force the display of errors */
     public show_errors: boolean;
     /** Whether to display the form field */
@@ -102,6 +104,7 @@ export class ADynamicFormField<T = any> {
         this.key = options.key;
         this.type = options.type;
         this.label = options.label;
+        this.required = options.required;
         this.content = options.content;
         this.metadata = options.metadata;
         this.attributes = options.attributes;
@@ -188,6 +191,18 @@ export class ADynamicFormField<T = any> {
      */
     public get formatted() {
         return this.format ? this.format(this.getValue()) : this.getValue();
+    }
+
+    public get error() {
+        const errors = this.control.errors;
+        if (errors) {
+            if (errors.message) {
+                return errors.message;
+            } else if (errors.required) {
+                return `${this.label} is required`;
+            }
+        }
+        return null;
     }
 
     /**

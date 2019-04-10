@@ -1,3 +1,5 @@
+@import '../../shared.styles.scss';
+
 .dynamic-field {
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +8,6 @@
 
 .details {
     display: flex;
-    min-width: 8em;
 }
 
 label {
@@ -14,14 +15,42 @@ label {
     font-weight: 600;
     margin: .5em;
     height: 1.4em;
+    min-width: 8em;
 }
 
 .control {
     display: flex;
     align-items: center;
+    flex-direction: column;
     flex: 1;
     min-width: 16em;
     min-height: 2em;
+}
+
+.input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.flex {
+        flex: 1;
+        min-width: 1em;
+    }
+}
+
+.line {
+    width: 100%;
+    display: flex;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2em;
+    min-height: 2em;
+    height: 2em;
 }
 
 input,
@@ -44,4 +73,30 @@ textarea {
 
 textarea {
     resize: none;
+}
+
+.error {
+    * {
+        border-color: $error;
+    }
+
+    .info {
+        display: flex;
+        color: $error;
+        opacity: 1;
+        height: 1.25em;
+    }
+}
+
+.info {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: .6em;
+    min-width: 100%;
+    margin-top: .4em;
+    opacity: 0;
+    height: 0;
+    transition: opacity 200ms, height 200ms;
+    overflow: hidden;
 }
