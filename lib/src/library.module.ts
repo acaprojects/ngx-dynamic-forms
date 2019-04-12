@@ -16,22 +16,28 @@ import { LIBRARY_SETTINGS } from './settings';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { DynamicFormFieldComponent } from './components/dynamic-field/dynamic-form-field.component';
 import { CustomFormFieldComponent } from './components/custom-field/custom-form-field.component';
+import { CustomFormFieldContentComponent } from './components/custom-field-content/custom-form-content.component';
 
 import * as day_api from 'dayjs';
 const dayjs = day_api;
 
-const COMPONENTS: Type<any>[] = [DynamicFormComponent, DynamicFormFieldComponent, CustomFormFieldComponent];
+const COMPONENTS: Type<any>[] = [
+    DynamicFormComponent,
+    DynamicFormFieldComponent,
+    CustomFormFieldComponent,
+    CustomFormFieldContentComponent
+];
 const DIRECTIVES: Type<any>[] = [];
 
 @NgModule({
-    declarations: [...COMPONENTS, ...DIRECTIVES],
+    declarations: [...COMPONENTS],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, TextFieldModule, CheckboxModule, DropdownModule],
-    exports: [...COMPONENTS, ...DIRECTIVES]
+    exports: [...COMPONENTS]
 })
 class LibraryModule {
-    public static version = '0.1.0';
+    public static version = '0.2.1';
     private static init = false;
-    private build = dayjs(1554792225000);
+    private build = dayjs(1555044519000);
 
     constructor() {
         if (!LibraryModule.init) {
