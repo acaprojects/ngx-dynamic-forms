@@ -17,7 +17,7 @@ export interface IFormFieldOptions<T = any> {
     /** Whether the form field is required */
     required?: boolean;
     /** Field keys that this field references */
-    references: string[];
+    references?: string[];
     /** Validators for the form field */
     validators?: ValidationFn[];
     /** Whether to hide the form field */
