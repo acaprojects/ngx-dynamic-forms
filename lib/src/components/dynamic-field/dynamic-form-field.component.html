@@ -21,7 +21,7 @@
     </div>
     <div class="control">
         <div class="line">
-            <div class="input">
+            <div class="input" [class.flex]="field.attributes?.flex !== false">
                 <ng-container *ngIf="!field.readonly; else readonly">
                     <ng-container [ngSwitch]="field.type">
                         <!-- TEXTAREA FORM FIELD -->
