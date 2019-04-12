@@ -16,6 +16,8 @@ export interface IFormFieldOptions<T = any> {
     disabled?: boolean;
     /** Whether the form field is required */
     required?: boolean;
+    /** Field keys that this field references */
+    references: string[];
     /** Validators for the form field */
     validators?: ValidationFn[];
     /** Whether to hide the form field */
@@ -80,6 +82,8 @@ export class ADynamicFormField<T = any> {
     readonly attributes: { [name: string]: string };
     /** Whether to field is required to have a value */
     readonly required: boolean;
+    /** Other field keys to reference */
+    readonly references: string[];
     /** Whether to force the display of errors */
     public show_errors: boolean;
     /** Whether to display the form field */
@@ -109,6 +113,7 @@ export class ADynamicFormField<T = any> {
         this.metadata = options.metadata;
         this.attributes = options.attributes;
         this._hide = options.hide;
+        this.references = options.references;
         if (!options.type || options.type !== 'group') {
             this.control = new FormControl({ value: options.value, disabled: options.disabled }, validators);
         } else {
@@ -158,7 +163,6 @@ export class ADynamicFormField<T = any> {
      * Get the current value of the form field
      */
     public setValue(value: T): void {
-        console.log('Set value:', value, this.control);
         if (this.control instanceof FormControl) {
             this.control.setValue(value);
         }
@@ -193,9 +197,12 @@ export class ADynamicFormField<T = any> {
         return this.format ? this.format(this.getValue()) : this.getValue();
     }
 
+    /**
+     * Get the error message for the form control
+     */
     public get error() {
         const errors = this.control.errors;
-        if (errors) {
+        if (errors && this.canDisplayErrors) {
             if (errors.message) {
                 return errors.message;
             } else if (errors.required) {
