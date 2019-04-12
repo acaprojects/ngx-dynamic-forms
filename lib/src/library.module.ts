@@ -35,9 +35,9 @@ const DIRECTIVES: Type<any>[] = [];
     exports: [...COMPONENTS]
 })
 class LibraryModule {
-    public static version = '0.2.3';
+    public static version = '0.2.4';
     private static init = false;
-    private build = dayjs(1555050033000);
+    private build = dayjs(1555051206000);
 
     constructor() {
         if (!LibraryModule.init) {

@@ -64,12 +64,22 @@ export class CustomFormFieldContentComponent implements OnInit, OnDestroy {
             : null;
     }
 
+    /**
+     * Create timer with the given name. Subsequent calls will clear any old timers with the same name.
+     * @param name Name idetifier for the timer
+     * @param fn Callback function for the timer
+     * @param delay Callback delay
+     */
     public timeout(name: string, fn: () => void, delay: number = 300): void {
         this.clearTimer(name);
         if (!(fn instanceof Function)) { return; }
         this.timers[name] = <any>setTimeout(() => fn(), delay);
     }
 
+    /**
+     * Clear timer with the given name
+     * @param name Name idetifier for the timer
+     */
     public clearTimer(name: string): void {
         if (this.timers[name]) {
             clearTimeout(this.timers[name]);
