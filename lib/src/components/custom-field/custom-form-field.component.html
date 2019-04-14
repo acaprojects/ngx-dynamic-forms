@@ -1,4 +1,4 @@
-<div [class]="'custom-field' + (klass ? ' ' + klass : '')" widget *ngIf="field">
+<ng-container *ngIf="field">
     <ng-container [ngSwitch]="method">
         <div *ngSwitchCase="'text'" [innerHTML]="content"></div>
         <ng-container *ngSwitchCase="'template'">
@@ -8,4 +8,4 @@
             <ng-container *ngComponentOutlet="content; injector: ctx_injector"></ng-container>
         </ng-container>
     </ng-container>
-</div>
+</ng-container>

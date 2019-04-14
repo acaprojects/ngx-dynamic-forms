@@ -186,7 +186,7 @@ export class ADynamicFormField<T = any> {
     /**
      * Whether errors should be displayed in the component
      */
-    public canDisplayErrors(): boolean {
+    public get canDisplayErrors(): boolean {
         return this.control.dirty || this.show_errors;
     }
 

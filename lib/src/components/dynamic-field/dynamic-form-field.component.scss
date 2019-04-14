@@ -98,4 +98,7 @@ textarea {
     height: 0;
     transition: opacity 200ms, height 200ms;
     overflow: hidden;
+    &.status {
+        padding-right: 2em;
+    }
 }
