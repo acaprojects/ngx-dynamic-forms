@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, TemplateRef, OnChanges, SimpleChanges, Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { ADynamicFormField, FormFieldContent } from '../dynamic-field.class';
@@ -22,6 +22,10 @@ export class CustomFormFieldComponent implements OnChanges {
     /** Context data to pass to the template/component injected into the component */
     public context;
 
+    public ctx_injector: Injector;
+
+    constructor(private injector: Injector) { }
+
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.field) {
             this.setMethod();
@@ -41,6 +45,11 @@ export class CustomFormFieldComponent implements OnChanges {
         } else if (this.content instanceof TemplateRef) {
             this.method = 'template';
             this.context = { ...this.field.metadata, key: this.field.key, group: this.group };
+        } else {
+            this.ctx_injector = Injector.create([
+                { provide: ADynamicFormField, useValue: this.field },
+                { provide: FormGroup, useValue: this.group }
+            ], this.injector);
         }
     }
 }

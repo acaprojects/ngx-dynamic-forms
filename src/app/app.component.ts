@@ -4,6 +4,7 @@ import { AppService } from './services/app.service';
 import { ADynamicFormField } from '../../lib/src/public_api';
 
 import * as day_api from 'dayjs';
+import { TestFieldComponent } from './text-field.component';
 const dayjs = day_api;
 
 @Component({
@@ -30,6 +31,14 @@ export class AppComponent implements OnInit {
                 key: 'other_name',
                 content: this.dropdown,
                 label: 'The dropdown',
+                value: 'Item 2',
+                metadata: { options: ['Item 1', 'Item 2', 'Item 3'] }
+            }),
+            new ADynamicFormField({
+                type: 'custom',
+                key: 'test',
+                content: TestFieldComponent,
+                label: 'The test',
                 value: 'Item 2',
                 metadata: { options: ['Item 1', 'Item 2', 'Item 3'] }
             })

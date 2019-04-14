@@ -7,10 +7,12 @@ import { DropdownModule } from '@acaprojects/ngx-dropdown';
 
 import { AppComponent } from './app.component';
 import { DynamicFormsModule } from '../../lib/src/public_api';
+import { TestFieldComponent } from './text-field.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +23,7 @@ import { DynamicFormsModule } from '../../lib/src/public_api';
     DropdownModule
   ],
   providers: [],
+  entryComponents: [TestFieldComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
