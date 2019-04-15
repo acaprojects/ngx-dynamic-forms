@@ -7,6 +7,7 @@
 }
 
 .details {
+    flex: 1;
     display: flex;
 }
 
@@ -16,13 +17,17 @@ label {
     margin: .5em;
     height: 1.4em;
     min-width: 8em;
+
+    span {
+        color: #ffb300;
+    }
 }
 
 .control {
     display: flex;
     align-items: center;
     flex-direction: column;
-    flex: 1;
+    flex: 3;
     min-width: 16em;
     min-height: 2em;
 }
@@ -33,7 +38,7 @@ label {
     justify-content: center;
 
     &.flex {
-        flex: 1;
+        flex: 3;
         min-width: 1em;
     }
 }

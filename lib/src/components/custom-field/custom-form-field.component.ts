@@ -6,7 +6,7 @@ import { ADynamicFormField, FormFieldContent } from '../dynamic-field.class';
 @Component({
     selector: 'a-custom-form-field',
     templateUrl: './custom-form-field.component.html',
-    styles: []
+    styles: [`a-custom-form-field:host { width: 100%; }`]
 })
 export class CustomFormFieldComponent implements OnChanges {
     /** CSS class to add to the root element of the component */

@@ -21,7 +21,7 @@
     </div>
     <div class="control">
         <div class="line">
-            <div class="input" [class.flex]="field.attributes?.flex !== false">
+            <div [class]="'input ' + field.type" [class.flex]="field.attributes?.flex !== false">
                 <ng-container *ngIf="!field.readonly; else readonly">
                     <ng-container [ngSwitch]="field.type">
                         <!-- TEXTAREA FORM FIELD -->
@@ -51,7 +51,7 @@
                         <!-- FIELD GROUP-->
                         <ng-container *ngSwitchCase="'group'">
                             <ng-container *ngFor="let item of field.children">
-                                <a-dynamic-form-field [klass]="klass" [group]="group" [field]="field"></a-dynamic-form-field>
+                                <a-dynamic-form-field [klass]="klass" [group]="group" [field]="item"></a-dynamic-form-field>
                             </ng-container>
                         </ng-container>
                         <!-- DEFAULT TO A TEXT INPUT FIELD -->
@@ -69,10 +69,10 @@
                     <div>{{ field.formatted }}</div>
                 </ng-template>
             </div>
-            <div class="status" *ngIf="!field.settings || !fields.settings.no_status">
+            <div class="status" *ngIf="(!field.settings || !fields.settings.no_status) && field.type !== 'group'">
                 <div class="icon" [class.error-icon]="field.error" [class.done-icon]=""></div>
             </div>
         </div>
-        <div class="info" [class.status]="field.settings && fields.settings.no_status">{{ field.error }}</div>
+        <div class="info" [class.status]="(!field.settings || !fields.settings.no_status) && field.type !== 'group'">{{ field.error }}</div>
     </div>
 </div>

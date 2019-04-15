@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { ADynamicFormField } from '../dynamic-field.class';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'a-dynamic-form',
@@ -24,7 +24,11 @@ export class DynamicFormComponent implements OnChanges {
     private initForm() {
         this.group = new FormGroup(
             this.fields.reduce((a, i) => {
-                if (i.control) {
+                if (i.control instanceof FormGroup) {
+                    for (const f of i.children) {
+                        a[f.key] = f.control;
+                    }
+                } else if (i.control instanceof FormControl) {
                     a[i.key] = i.control;
                 }
                 return a;

@@ -41,7 +41,11 @@ export class AppComponent implements OnInit {
                 label: 'The test',
                 value: 'Item 2',
                 metadata: { options: ['Item 1', 'Item 2', 'Item 3'] }
-            })
+            }),
+            new ADynamicFormField({ type: 'group', key: 'name', value: null, children: [
+                { type: 'input', key: 'f_name', label: 'Your name', value: null }, 
+                { type: 'input', key: 'l_name', label: 'Your name', value: null }
+            ] })
         ];
         setInterval(() => {
             const value = Math.floor(Math.random() * 99999);

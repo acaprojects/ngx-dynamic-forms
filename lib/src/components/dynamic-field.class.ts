@@ -120,7 +120,7 @@ export class ADynamicFormField<T = any> {
             if (options.children && options.children.length > 0) {
                 options.children.forEach(i => this.children.push(new ADynamicFormField(i)));
             }
-            this.control = new FormGroup(this.children.reduce((a, i) => (a[i.key] = i.control), {}));
+            this.control = new FormGroup(this.children.reduce((a, i) => {(a[i.key] = i.control); return a; }, {}));
         }
     }
 
