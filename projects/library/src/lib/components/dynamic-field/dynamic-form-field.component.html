@@ -1,0 +1,78 @@
+<div
+    *ngIf="group"
+    [class]="'dynamic-field' + (klass ? ' ' + klass : '') + (' ' + field?.type)"
+    widget
+    [style.display]="field.hide ? 'none' : ''"
+    [class.error]="field.error"
+    [formGroup]="group"
+>
+    <div class="details" *ngIf="field.type !== 'group'">
+        <div class="icon" *ngIf="field.icon">
+            <i *ngIf="!field.icon.type || field.icon.type === 'icon'" [class]="field.icon.class">{{ field.icon.value }}</i>
+            <img *ngIf="field.icon.type === 'image' || field.icon.type === 'img'" [src]="field.icon.src" />
+        </div>
+        <label *ngIf="field.label" [for]="field.key">
+            {{ field.label }}
+            <ng-container *ngIf="field.settings?.show_count">
+                ({{ field.control.value ? field.control.value.length || '0' : '0' }})
+            </ng-container>
+            <span *ngIf="field.required">*</span>
+        </label>
+    </div>
+    <div class="control">
+        <div class="line">
+            <div [class]="'input ' + field.type" [class.flex]="field.attributes?.flex !== false">
+                <ng-container *ngIf="!field.readonly; else readonly">
+                    <ng-container [ngSwitch]="field.type">
+                        <!-- TEXTAREA FORM FIELD -->
+                        <textarea
+                            *ngSwitchCase="'textarea'"
+                            cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="4"
+                            cdkAutosizeMaxRows="8"
+                            [formControlName]="field.key"
+                            [id]="field.key"
+                            [placeholder]="field.attributes?.placeholder || field.attributes?.label || field.label"
+                        ></textarea>
+                        <!-- SELECT/ACTION FORM FIELD -->
+                        <div *ngSwitchCase="'action'" class="underline" (tapped)="field.performAction()">
+                            {{ field.formatted }}
+                        </div>
+                        <!-- SELECT/ACTION FORM FIELD -->
+                        <a-checkbox
+                            *ngSwitchCase="'checkbox'"
+                            [label]="field.attributes?.placeholder || field.attributes?.label || field.label"
+                        ></a-checkbox>
+                        <!-- CUSTOM FORM FIELD -->
+                        <ng-container *ngSwitchCase="'custom'">
+                            <a-custom-form-field [klass]="klass" [group]="group" [field]="field"></a-custom-form-field>
+                        </ng-container>
+                        <!-- FIELD GROUP-->
+                        <ng-container *ngSwitchCase="'group'">
+                            <ng-container *ngFor="let item of field.children">
+                                <a-dynamic-form-field [klass]="klass" [group]="group" [field]="item"></a-dynamic-form-field>
+                            </ng-container>
+                        </ng-container>
+                        <!-- DEFAULT TO A TEXT INPUT FIELD -->
+                        <input
+                            *ngSwitchCase="'input'"
+                            [id]="field.key"
+                            [formControlName]="field.key"
+                            [type]="field.attributes?.type"
+                            [placeholder]="field.attributes?.placeholder || field.label"
+                        />
+                        <div *ngSwitchDefault>{{ field.formatted }}</div>
+                    </ng-container>
+                </ng-container>
+                <ng-template #readonly>
+                    <div>{{ field.formatted }}</div>
+                </ng-template>
+            </div>
+            <div class="status" *ngIf="(!field.settings || !field.settings.no_status) && field.type !== 'group'">
+                <div class="icon" [class.error-icon]="field.error" [class.done-icon]=""></div>
+            </div>
+        </div>
+        <div class="info" [class.status]="(!field.settings || !field.settings.no_status) && field.type !== 'group'">{{ field.error }}</div>
+    </div>
+</div>
