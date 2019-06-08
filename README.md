@@ -1,8 +1,8 @@
 # Angular 8+ Dynamic Form Library
 
-[![Travis](https://travis-ci.org/acaprojects/ngx-dynamic-form.svg)](https://travis-ci.org/acaprojects/ngx-dynamic-form)
-[![npm version](https://badge.fury.io/js/%40acaprojects%2Fngx-dynamic-form.svg)](https://badge.fury.io/js/%40acaprojects%2Fngx-dynamic-form)
-[![david-dm](https://david-dm.org/acaprojects/ngx-dynamic-form.svg)](https://david-dm.org/acaprojects/ngx-dynamic-form)
+[![Travis](https://travis-ci.org/acaprojects/ngx-dynamic-forms.svg)](https://travis-ci.org/acaprojects/ngx-dynamic-forms)
+[![npm version](https://badge.fury.io/js/%40acaprojects%2Fngx-dynamic-forms.svg)](https://badge.fury.io/js/%40acaprojects%2Fngx-dynamic-forms)
+[![david-dm](https://david-dm.org/acaprojects/ngx-dynamic-forms.svg)](https://david-dm.org/acaprojects/ngx-dynamic-forms)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
@@ -21,4 +21,4 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Installation
 
-You install the library from npm using `npm install @acaprojects/ngx-dynamic-form`;
+You install the library from npm using `npm install @acaprojects/ngx-dynamic-forms`;

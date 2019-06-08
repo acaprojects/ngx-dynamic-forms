@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ADropdownsModule } from '@acaprojects/ngx-dropdown';
 
 import { AppComponent } from './app.component';
-import { ADynamicFormModule } from 'projects/library/src/public-api';
+import { ADynamicFormsModule } from 'projects/library/src/public-api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -14,7 +14,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   ],
   imports: [
     BrowserModule,
-    ADynamicFormModule,
+    ADynamicFormsModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

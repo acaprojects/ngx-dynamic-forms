@@ -41,5 +41,5 @@ export class LibraryModule {
     }
 }
 
-export { LibraryModule as ACA_DYNAMIC_FORM_MODULE };
-export { LibraryModule as ADynamicFormModule };
+export { LibraryModule as ACA_DYNAMIC_FORMS_MODULE };
+export { LibraryModule as ADynamicFormsModule };

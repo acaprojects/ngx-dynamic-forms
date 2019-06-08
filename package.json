@@ -1,5 +1,5 @@
 {
-  "name": "ngx-dynamic-form-project",
+  "name": "ngx-dynamic-forms-project",
   "version": "0.0.0-development",
   "scripts": {
     "ng": "ng",
@@ -66,6 +66,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/acaprojects/ngx-dynamic-form.git"
+    "url": "https://github.com/acaprojects/ngx-dynamic-forms.git"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@acaprojects/ngx-dynamic-form",
+  "name": "@acaprojects/ngx-dynamic-forms",
   "version": "0.0.0-development",
   "publishConfig": {
     "access": "public"
@@ -9,9 +9,9 @@
     "pipes"
   ],
   "description": "Assortment of Pipes for Angular 8+",
-  "homepage": "https://github.com/acaprojects/ngx-dynamic-form#readme",
+  "homepage": "https://github.com/acaprojects/ngx-dynamic-forms#readme",
   "bugs": {
-      "url": "https://github.com/acaprojects/ngx-dynamic-form/issues"
+      "url": "https://github.com/acaprojects/ngx-dynamic-forms/issues"
   },
   "peerDependencies": {
     "@angular/common": "^8.0.0",
