@@ -69,9 +69,6 @@
                     <div>{{ field.formatted }}</div>
                 </ng-template>
             </div>
-            <div class="status" *ngIf="(!field.settings || !field.settings.no_status) && field.type !== 'group'">
-                <div class="icon" [class.error-icon]="field.error" [class.done-icon]=""></div>
-            </div>
         </div>
         <div class="info" [class.status]="(!field.settings || !field.settings.no_status) && field.type !== 'group'">{{ field.error }}</div>
     </div>
