@@ -119,6 +119,8 @@ export class ADynamicFormField<T = any> {
         this._settings = options.settings;
         this.attributes = options.attributes;
         this._hide = options.hide;
+        this.action = options.action;
+        this.format = options.format;
         this.references = options.references;
         if (!options.type || options.type !== 'group') {
             this.control = new FormControl({ value: options.value, disabled: options.disabled }, validators);
@@ -194,7 +196,7 @@ export class ADynamicFormField<T = any> {
         return this.control.dirty || this.show_errors;
     }
 
-    /** Get formatted form control value */
+    /** Formatted form control value */
     public get formatted(): (string | T) {
         return this.format ? this.format(this.getValue()) : this.getValue();
     }
@@ -210,7 +212,7 @@ export class ADynamicFormField<T = any> {
     }
 
     public get settings(): { [name: string]: any } {
-    return this._settings;
+        return this._settings;
     }
 
     /** Get the error message for the form control */

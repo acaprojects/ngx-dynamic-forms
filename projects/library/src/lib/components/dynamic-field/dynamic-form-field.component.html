@@ -39,7 +39,7 @@
                         <div *ngSwitchCase="'action'" class="underline" (tapped)="field.performAction()">
                             {{ field.formatted }}
                         </div>
-                        <!-- SELECT/ACTION FORM FIELD -->
+                        <!-- CHECKBOX FORM FIELD -->
                         <a-checkbox
                             *ngSwitchCase="'checkbox'"
                             [label]="field.attributes?.placeholder || field.attributes?.label || field.label"
