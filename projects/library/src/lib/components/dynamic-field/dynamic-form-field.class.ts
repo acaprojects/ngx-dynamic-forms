@@ -1,5 +1,6 @@
 import { TemplateRef, Type } from '@angular/core';
 import { FormControl, AbstractControl, Validators, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 export interface IFormFieldOptions<T = any> {
     /** Identier of the form field */
@@ -34,8 +35,6 @@ export interface IFormFieldOptions<T = any> {
     settings?: IFormFieldSettings;
     /** Function for formatting the display value of the form field */
     format?: (value: T) => string;
-    /** Action callback for `select` control_type */
-    action?: (value: T) => Promise<T>;
 }
 
 export interface IFormFieldSettings {
@@ -96,8 +95,8 @@ export class ADynamicFormField<T = any> {
 
     /** Function for formatting the display value of the form field */
     private format: (value: T) => string;
-    /** Action callback for `action` control_type */
-    private action: (value: T) => Promise<T>;
+    /** Subject for emitting actions on the field */
+    public action: Subject<T> = new Subject<T>();
 
     constructor(options: IFormFieldOptions<T>) {
         if (!options || !options.key || !options.type) {
@@ -119,7 +118,6 @@ export class ADynamicFormField<T = any> {
         this._settings = options.settings;
         this.attributes = options.attributes;
         this._hide = options.hide;
-        this.action = options.action;
         this.format = options.format;
         this.references = options.references;
         if (!options.type || options.type !== 'group') {
@@ -232,12 +230,6 @@ export class ADynamicFormField<T = any> {
      * Call the action function for the control
      */
     public performAction() {
-        if (this.action && this.action instanceof Function) {
-            this.action(this.getValue()).then(v => {
-                if (v && this.control instanceof FormControl) {
-                    this.setValue(v);
-                }
-            });
-        }
+        this.action.next(this.getValue());
     }
 }

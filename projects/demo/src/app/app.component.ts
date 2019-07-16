@@ -17,7 +17,7 @@ export class AppComponent {
     public ngOnInit(): void {
         const fields: IFormFieldOptions[] = [
             { type: 'input', key: 'name', label: 'Your name', value: null },
-            { type: 'action', key: 'host', label: 'Your host', value: 'Check', action: () => Promise.resolve(console.log('Action Called')) },
+            { type: 'action', key: 'host', label: 'Your host', value: 'Check' },
             { type: 'checkbox', key: 'attending', attributes: { label: 'Attending' }, value: null },
             { type: 'textarea', key: 'other_name', label: 'Your name', value: null },
             {
@@ -42,6 +42,7 @@ export class AppComponent {
             ] }
         ];
         this.model.fields = fields.map(i => new ADynamicFormField(i));
+        this.model.fields.filter(i => i.type === 'action').forEach(i => i.action.subscribe(() => console.log('Action Called')));
         setInterval(() => {
             const value = Math.floor(Math.random() * 99999);
             console.log('Value:', value);
