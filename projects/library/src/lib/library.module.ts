@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { ACheckboxModule } from '@acaprojects/ngx-checkbox';
+import { ACustomEventsModule } from '@acaprojects/ngx-custom-events';
 
 import { version } from './settings';
 
@@ -19,7 +20,7 @@ import { ACustomFormFieldComponent } from './components/custom-field/custom-form
         ADynamicFormFieldComponent,
         ACustomFormFieldComponent
     ],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, TextFieldModule, ACheckboxModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, TextFieldModule, ACheckboxModule, ACustomEventsModule],
     exports: [
         ADynamicFormComponent,
         ADynamicFormFieldComponent,

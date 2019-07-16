@@ -234,7 +234,7 @@ export class ADynamicFormField<T = any> {
     public performAction() {
         if (this.action && this.action instanceof Function) {
             this.action(this.getValue()).then(v => {
-                if (this.control instanceof FormControl) {
+                if (v && this.control instanceof FormControl) {
                     this.setValue(v);
                 }
             });
