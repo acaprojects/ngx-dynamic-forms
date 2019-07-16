@@ -17,7 +17,7 @@ export class AppComponent {
     public ngOnInit(): void {
         const fields: IFormFieldOptions[] = [
             { type: 'input', key: 'name', label: 'Your name', value: null },
-            { type: 'action', key: 'host', label: 'Your host', value: 'Check' },
+            { type: 'action', key: 'host', label: 'Your host', value: 'Check', action: () => Promise.resolve(console.log('Action Called')) },
             { type: 'checkbox', key: 'attending', attributes: { label: 'Attending' }, value: null },
             { type: 'textarea', key: 'other_name', label: 'Your name', value: null },
             {
