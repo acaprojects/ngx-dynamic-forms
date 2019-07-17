@@ -4,6 +4,7 @@
     widget
     [style.display]="field.hide ? 'none' : ''"
     [class.error]="field.error"
+    [attr.role]="field?.type"
     [formGroup]="group"
 >
     <div class="details" *ngIf="field.type !== 'group'">
@@ -42,6 +43,8 @@
                         <!-- CHECKBOX FORM FIELD -->
                         <a-checkbox
                             *ngSwitchCase="'checkbox'"
+                            [formControlName]="field.key"
+                            [id]="field.key"
                             [label]="field.attributes?.placeholder || field.attributes?.label || field.label"
                         ></a-checkbox>
                         <!-- CUSTOM FORM FIELD -->

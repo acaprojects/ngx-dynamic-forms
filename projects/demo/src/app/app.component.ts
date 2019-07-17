@@ -14,6 +14,10 @@ export class AppComponent {
 
     @ViewChild(TemplateRef, { static: true }) private dropdown: TemplateRef<any>;
 
+    public get form_fields(): string {
+        return JSON.stringify(this.model.fields.reduce((v, i) => { v[i.key] = i.control.value; return v; }, {}));
+    }
+
     public ngOnInit(): void {
         const fields: IFormFieldOptions[] = [
             { type: 'input', key: 'name', label: 'Your name', value: null },

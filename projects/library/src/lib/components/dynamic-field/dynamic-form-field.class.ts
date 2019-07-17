@@ -124,7 +124,7 @@ export class ADynamicFormField<T = any> {
             this.control = new FormControl({ value: options.value, disabled: options.disabled }, validators);
         } else {
             if (options.children && options.children.length > 0) {
-                options.children.forEach(i => this.children.push(new ADynamicFormField(i)));
+                options.children.forEach(i => this.children.push(i instanceof ADynamicFormField ? i : new ADynamicFormField(i)));
             }
             this.control = new FormGroup(this.children.reduce((a, i) => {(a[i.key] = i.control); return a; }, {}));
         }
