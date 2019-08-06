@@ -4,6 +4,8 @@
     widget
     [style.display]="field.hide ? 'none' : ''"
     [class.error]="field.error"
+    [name]="field.key"
+    [attr.field-key]="field.key"
     [attr.role]="field?.type"
     [formGroup]="group"
 >
