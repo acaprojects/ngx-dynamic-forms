@@ -44,6 +44,10 @@ export interface IFormFieldSettings {
     readonly?: boolean;
     /** Whether custom component should fill whitespace */
     flex?: boolean;
+    /** Show count of list items next to the field label */
+    show_count?: boolean;
+    /** Hide status icon */
+    no_status?: boolean;
 }
 
 export interface IFormFieldIcon {
@@ -80,8 +84,6 @@ export class ADynamicFormField<T = any> {
     readonly attributes: { [name: string]: string };
     /** Whether the field is required to have a value */
     readonly required: boolean;
-    /** Whether the field is readonly */
-    readonly readonly: boolean;
     /** Other field keys to reference */
     readonly references: string[];
     /** Whether to force the display of errors */
@@ -91,7 +93,7 @@ export class ADynamicFormField<T = any> {
     /** Metadata passed into custom field contents */
     private _metadata: { [name: string]: any };
     /** Field settings */
-    private _settings: { [name: string]: any };
+    private _settings: IFormFieldSettings;
 
     /** Function for formatting the display value of the form field */
     private format: (value: T) => string;
@@ -148,6 +150,11 @@ export class ADynamicFormField<T = any> {
     /** Whether this form control is displayed */
     public get hide() {
         return this._hide;
+    }
+
+    /** Whether the field is readonly */
+    public get readonly(): boolean {
+        return !!this.settings.readonly;
     }
 
     /**
@@ -209,7 +216,7 @@ export class ADynamicFormField<T = any> {
         this._metadata = data;
     }
 
-    public get settings(): { [name: string]: any } {
+    public get settings(): IFormFieldSettings {
         return this._settings;
     }
 
