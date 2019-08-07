@@ -217,7 +217,7 @@ export class ADynamicFormField<T = any> {
     }
 
     public get settings(): IFormFieldSettings {
-        return this._settings;
+        return this._settings || {};
     }
 
     /** Get the error message for the form control */
