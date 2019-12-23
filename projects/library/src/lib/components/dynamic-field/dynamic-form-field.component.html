@@ -36,6 +36,7 @@
                             cdkAutosizeMaxRows="8"
                             [formControlName]="field.key"
                             [id]="field.key"
+                            [name]="field.key"
                             [placeholder]="field.attributes?.placeholder || field.attributes?.label || field.label"
                         ></textarea>
                         <!-- SELECT/ACTION FORM FIELD -->
@@ -63,6 +64,7 @@
                         <input
                             *ngSwitchCase="'input'"
                             [id]="field.key"
+                            [name]="field.key"
                             [formControlName]="field.key"
                             [type]="field.attributes?.type"
                             [placeholder]="field.attributes?.placeholder || field.label"

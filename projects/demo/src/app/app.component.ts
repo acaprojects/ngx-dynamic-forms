@@ -42,7 +42,7 @@ export class AppComponent {
             {
                 type: 'group', key: 'name', value: null, children: [
                 { type: 'input', key: 'f_name', label: 'Your name', value: null },
-                { type: 'input', key: 'l_name', label: 'Your name', value: null }
+                { type: 'input', key: 'title', label: 'Subject', value: null }
             ] }
         ];
         this.model.fields = fields.map(i => new ADynamicFormField(i));
